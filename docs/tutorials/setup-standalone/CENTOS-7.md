@@ -4,10 +4,10 @@
 
 - [ 1. Chuẩn bị ](#1)
 - [ 2. Cài đặt ](#2)
-    - 2.1 Cài đặt RabbitMQ ](#2.1)
-    - 2.2 Cấu hình tường lửa Firewalld ](#2.2)
-    - 2.3 Bật tính năng Web UI ](#2.3)
-    - 2.4 Tạo user trong RabbitMQ ](#2.4)
+    - [2.1 Cài đặt RabbitMQ ](#2.1)
+    - [2.2 Cấu hình tường lửa Firewalld ](#2.2)
+    - [2.3 Bật tính năng Web UI ](#2.3)
+    - [2.4 Tạo user trong RabbitMQ ](#2.4)
 - [ 3. Kết luận ] (#3)
 
 <a name="1"></a>
