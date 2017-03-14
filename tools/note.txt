@@ -1,0 +1,27 @@
+Note Rabbit
+- Sử dụng công cụ quản trị rabbitmqctl, rabbitadmin
+- Lệnh xem ram, disk;
+- Lệnh  xem cluster đã hoàn thành
+- Viết tài liệu trên Ubuntu, Centos
+-------
+- 2 node chet dong thoi
+    1 3 ---> Bat ky
+    1 2 ---> Bat ky
+    2 1 ---> Bat ky
+    2 3 ---> Bat ky
+    3 2 ---> Bat ky
+    3 1 ---> Bat ky
+- tat lan luot - Bat node tat cuoi cung truoc
+    1 2 3   
+    1 3 2
+    2 1 3
+    2 3 1
+    3 2 1
+    3 1 2
+- tat 2 node khong phai la node1 --> xem hien tuong, xu ly
+   ------- Khi bị hiện tượng Partition, cần khởi động lại app
+- doi 1 node sang ram
+- Xac dinh node join tu dau X: running - node cuoi cung la node join thu nhat;
+- GO 1 node ra khoi cluster
+    - node chinh truoc
+    - cac node con lai truoc
