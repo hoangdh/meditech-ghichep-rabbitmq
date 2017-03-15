@@ -1,11 +1,11 @@
-## Hướng dẫn cài đặt RabbitMQ trên CentOS 7
+## Hướng dẫn cài đặt RabbitMQ trên Ubuntu 16
 
 ### Menu
 
 - [ 1. Chuẩn bị ](#1)
 - [ 2. Cài đặt ](#2)
     - [2.1 Cài đặt RabbitMQ ](#2.1)
-    - [2.2 Cấu hình tường lửa Firewalld ](#2.2)
+    - [2.2 Cấu hình tường lửa ](#2.2)
     - [2.3 Bật tính năng Web UI ](#2.3)
     - [2.4 Tạo user trong RabbitMQ ](#2.4)
 - [3. Tham khảo](#3)
@@ -14,17 +14,19 @@
 ### 1. Chuẩn bị
 
 ```
-OS: CentOS 7
+OS: Ubuntu 16.04
 eth0: 192.168.100.196
 Network: 192.168.100.0/24
 Getway: 192.168.100.1
 ```
 
-Để cài đặt được RabbitMQ trên CentOS, chúng ta cài đặt trước gói `epel-release`, `wget` và `python` trên server trước.
+Để cài đặt được RabbitMQ trên CentOS, chúng ta cài đặt trước repository của RabbitMQ, `wget` và `python` trên server trước.
 
 ```
-yum install -y epel-release 
-yum install -y wget python
+apt-get install -y wget python
+echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+sudo apt-get update
 ```
 <a name="2"></a>
 ### 2. Cài đặt
@@ -34,7 +36,7 @@ yum install -y wget python
 Tiếp theo, chúng ta sẽ sử dụng `yum` để cài đặt RabbitMQ.
 
 ```
-yum -y install rabbitmq-server
+apt-get -y install rabbitmq-server
 ```
 
 Bật và cho RabbitMQ khởi động cùng hệ thống.
@@ -45,14 +47,13 @@ systemctl enable rabbitmq-server
 ```
 
 <a name="2.2"></a>
-#### 2.2 Cấu hình tường lửa Firewalld
+#### 2.2 Cấu hình tường lửa Firewall
 
-Nếu bạn sử dụng Firewalld, hãy thêm các rule sau:
+Nếu bạn sử dụng Firewall, hãy thêm các rule sau:
 
 ```
-firewall-cmd --add-port=5672/tcp --permanent
-firewall-cmd --add-port=15672/tcp --permanent
-firewall-cmd --reload
+ufw allow 5672/tcp
+ufw allow 15672/tcp
 ```
 
 <a name="2.3"></a>
@@ -97,12 +98,12 @@ Phân quyền quản lý cho user ([modify) (write) (read)]
 rabbitmqctl set_permissions -p / admin1 ".*" ".*" ".*"
 ```
 
-Để xóa user vừa tạo:
+Để xóa user:
 
 ```
-rabbitmqctl delete_user admin1
+rabbitmqctl delete_user guest
 ```
 <a name="3"></a>
 #### 3. Tham khảo
 
-- https://www.server-world.info/en/note?os=CentOS_7&p=rabbitmq&f=1
+- http://www.rabbitmq.com/install-debian.html
