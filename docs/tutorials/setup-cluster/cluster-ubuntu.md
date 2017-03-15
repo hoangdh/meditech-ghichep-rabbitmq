@@ -4,7 +4,7 @@
 
 - [ 1. Chuẩn bị ](#1)
     -   [1.1 Thông tin](#1.1)
-    -   [1.2 Một số cấu hình chung]
+    -   [1.2 Một số cấu hình chung](#1.2)
 - [ 2. Cấu hình Cluster ](#2)
     - [2.1 Cấu hình trên node thứ nhất](#2.1)
     - [2.2 Cấu hình các node còn lại](#2.2)
@@ -26,8 +26,9 @@ Getway: 192.168.100.1
 
 Thông tin riêng
 
----|---|---|
+
 Node | Hostname | IP |
+---|---|---|
 1 | node1 | 192.168.100.196 |
 2 | node2 | 192.168.100.197 |
 3 | node3 | 192.168.100.198 |
