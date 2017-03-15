@@ -9,4 +9,5 @@
 ### [5. Topics](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/gettingstarted/5.Topics.md)
 ### [6. RPC](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/gettingstarted/6.RPC.md)
 
-## [Tutorials](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/README.md)
+## Tutorials
+### [Cài đặt Standalone và Clustering](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/README.md)
