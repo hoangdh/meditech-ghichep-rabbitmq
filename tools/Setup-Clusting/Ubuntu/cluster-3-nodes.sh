@@ -15,7 +15,7 @@ set_host()
 {
 . ./var.cfg
 ### Write to hosts
-echo -e "$IP1 $host1
+echo "$IP1 $host1
 $IP2 $host2
 $IP3 $host3" >> /etc/hosts
 ### Gen-key
@@ -36,54 +36,7 @@ do
 done
 
 }
-rabbitmq()
-{
-    #yum update -y
-    apt-get install -y wget python
-    echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
-    sudo apt-get update
-    apt-get -y install rabbitmq-server
-    systemctl start rabbitmq-server 
-    systemctl enable rabbitmq-server
 
-    check_fw=`ufw status | grep -w "active"`
-
-    if [ -n "$check_fw" ]
-    then
-        ufw allow 5672/tcp
-        ufw allow 15672/tcp
-        ufw reload
-        echo "Firewall has been configured."
-    fi 
-
-    ## Create a new user
-
-    rabbitmqctl add_user admin1 abc@123
-    rabbitmqctl set_user_tags admin1 administrator
-
-    ## Grant permissions to new user
-
-    rabbitmqctl set_permissions -p / admin1 ".*" ".*" ".*" 
-
-    ## Enable web UI
-
-    rabbitmq-plugins enable rabbitmq_management
-    systemctl restart rabbitmq-server
-
-    ## Install rabbitmqadmin tools
-
-    wget http://localhost:15672/cli/rabbitmqadmin
-    chmod a+x rabbitmqadmin
-    mv rabbitmqadmin /usr/sbin/
-    rabbitmqadmin list users
-
-    ip_addr=` ip addr | grep 'state UP' -A2 | tail -n1 | awk -F'[/ ]+' '{print $3}'`
-    echo -e "Access to Web UI: http://$ip_addr:15672
-             Username: admin1
-             Password: abc@123"
-
-}
 setup_rb()
 {   
     check_rb=`dpkg -l | grep -w "rabbitmq-server"`
@@ -92,7 +45,50 @@ setup_rb()
     then
         echo "RabbitMQ has been installed."            
     else
-        rabbitmq
+        #yum update -y
+        apt-get install -y wget python
+        echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+        wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+        sudo apt-get update
+        apt-get -y install rabbitmq-server
+        systemctl start rabbitmq-server 
+        systemctl enable rabbitmq-server
+
+        check_fw=`ufw status | grep -w "active"`
+
+        if [ -n "$check_fw" ]
+        then
+            ufw allow 5672/tcp
+            ufw allow 15672/tcp
+            ufw reload
+            echo "Firewall has been configured."
+        fi 
+
+        ## Create a new user
+
+        rabbitmqctl add_user admin1 abc@123
+        rabbitmqctl set_user_tags admin1 administrator
+
+        ## Grant permissions to new user
+
+        rabbitmqctl set_permissions -p / admin1 ".*" ".*" ".*" 
+
+        ## Enable web UI
+
+        rabbitmq-plugins enable rabbitmq_management
+        systemctl restart rabbitmq-server
+
+        ## Install rabbitmqadmin tools
+
+        wget http://localhost:15672/cli/rabbitmqadmin
+        chmod a+x rabbitmqadmin
+        mv rabbitmqadmin /usr/sbin/
+        rabbitmqadmin list users
+
+        ip_addr=` ip addr | grep 'state UP' -A2 | tail -n1 | awk -F'[/ ]+' '{print $3}'`
+        echo -e "Access to Web UI: http://$ip_addr:15672
+                 Username: admin1
+                 Password: abc@123"
     fi 
 }
 
@@ -137,14 +133,14 @@ do
     HOST=`cat var.cfg | grep -e "host$NODE" |  awk -F = '{print $2}'`
     if [ "$NODE" == "1" ]
         then
-            ssh $HOST "$(typeset -f); setup_rb"
-            ssh $HOST "$(typeset -f); config_fw"
+            ssh $HOST "$(typeset -f setup_rb); setup_rb"
+            ssh $HOST "$(typeset -f config_fw); config_fw"
         else
-            ssh $HOST "$(typeset -f); setup_rb"
-            ssh $HOST "$(typeset -f); copy_cookie $host1"
+            ssh $HOST "$(typeset -f setup_rb); setup_rb"
+            ssh $HOST "$(typeset -f copy_cookie); copy_cookie $host1"
     fi
 done 
-ssh $host1 "$(typeset -f); sync_queue"
+ssh $host1 "$(typeset -f sync_queue); sync_queue"
 echo -e "- Run command to test: \"rabbitmqadmin list queues name node policy slave_nodes state synchronised_slave_nodes\"
 - Node remote: \"ssh node1 rabbitmqadmin list queues name node policy slave_nodes state synchronised_slave_nodes\"
 "
