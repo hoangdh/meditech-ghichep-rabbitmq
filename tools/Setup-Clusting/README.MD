@@ -9,7 +9,7 @@
 <a name="1"></a>
 ### 1. Giới thiệu
 
-Script này sẽ giúp các bạn cài đặt và cấu hình tự động Cluster 3 node cho RabbitMQ trên [CentOS 7](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-centos.md) hoặc [Ubuntu 16](https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-ubuntu.md). Các bạn có thể xem bài hướng dẫn cài đặt bằng tay để hiểu rõ hơn quá trình làm việc của script.
+Script này sẽ giúp các bạn cài đặt và cấu hình tự động Cluster 3 node cho RabbitMQ trên [CentOS 7](meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-centos.md) hoặc [Ubuntu 16](meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-ubuntu.md). Các bạn có thể xem bài hướng dẫn cài đặt bằng tay để hiểu rõ hơn quá trình làm việc của script.
 
 <a name="2"></a>
 ### 2. Yêu cầu:
