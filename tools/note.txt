@@ -25,3 +25,9 @@ Note Rabbit
 - GO 1 node ra khoi cluster
     - node chinh truoc
     - cac node con lai truoc
+    
+https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/tools/Setup-Clusting/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-centos.md
+/tools/meditech-ghichep-rabbitmq/blob/master/docs/tutorials/setup-cluster/cluster-centos.md
+/docs/tutorials/setup-cluster/cluster-ubuntu.md
+
+https://github.com/hoangdh/meditech-ghichep-rabbitmq/blob/master/
