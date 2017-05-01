@@ -91,7 +91,7 @@ Chúng ta kiểm tra đã kết nối thành công bằng lệnh.
 rabbit@node2# rabbitmqctl cluster_status
 ```
 
-Tương tự, chúng ta làm tương tự trên `node3`.
+Tương tự, chúng ta cấu hình theo các bước trên `node3`.
 
 <a name="2.3"></a>
 #### 2.3 Bật tính năng đồng bộ các queue giữa các node
@@ -108,12 +108,7 @@ Sau khi cài đặt xong, chúng ta kiểm tra lại bằng lệnh:
 ```bash
 rabbit@node1# rabbitmqadmin list queues name node policy slave_nodes state synchronised_slave_nodes
 ```
-
-hoặc
-
-```
-
-``` 
+ 
 <a name="3"></a>
 #### 3. Tham khảo
 
